@@ -61,14 +61,14 @@ maike = {
     ]
 }
 
-import random,time
+import random,time,threading
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 try:
-    driver = webdriver.Chrome(executable_path=r'/Users/huangrenwu/Project/submitProject/chromedriver')
+    driver = webdriver.Chrome(executable_path=r'/Users/huangrenwu/Project/submitProject/file/chromedriver')
 except:
     driver = webdriver.Chrome(executable_path=r'D:/Project/submitProject/file/chromedriver.exe')
 driver.maximize_window()
@@ -77,15 +77,23 @@ driver.get('https://www.baidu.com')
 class SubmitMoney:
 
     def __init__(self,dataList=[]):
-        
         if dataList == []:
             pass
             # while True:
             #     data = f'{random.choice(UrlList)} 测试号 19999999999'
             #     self.startRequest(data)
         else:
+            threadList = []
             for data in dataList:
-                self.startRequest(data)
+                t = threading.Thread(target=self.startRequest,args=(data,))
+                threadList.append(t)
+            for t in threadList:
+                t.start()
+            for t in threadList:
+                t.join()
+        hendlesList = driver.window_handles
+        for hendles in hendlesList:
+            driver.switch_to.window(hendles)
 
 
     def startRequest(self,inputDate):
@@ -265,4 +273,4 @@ class SubmitMoney:
 
 
 # UrlList = ['http://wanxinying.com:80/SubmitInfo/Index?token=on72O0HLstS%2bTrjMnWJuRAXKwhuTKJnjWqtLuQW0yE8pPqn9mCI1hEJzSUrgYMW3cWx%2f70zNL19BT5AMHm5SXl9BOg%2f3hgL0TZhWB7OWgAVXQoHtj07pn5Z7Gwx%2bSJuNYfzN2NypJn9PNZN9zLxBI1iEOH6dORa%2bo8rFTXKWp9c%3d', 'http://wanxinying.com/SubmitInfo/Index?token=on72O0HLstS%2B7EaB16ZG2yC4qAYB0BsB5Rt83b2xdJnfesJPjTwg9k4LHGHeRZq7KvFsL7z3uuuuaYssrPTPCwufvWqKCUCzUeJpG8J6dPxaTadf7XsiVCBcOCUMm1Wlru00RC6PpyNR1oA0SfoHE9sUIPJOKVa2NXidIfcrBIeZg0smEs6qag%3D%3D', 'http://wanxinying.com:80/SubmitInfo/Index?token=on72O0HLstQAtB0pNaoApuK1eUzYaOwO776KUwwbsDiBmRFsvFoWe634vMZVqAqqITdYGO1JiW6dz7RFch4488yHK4boWLxv3iLTSfF3dg97MpzyASGWW84l5%2bB3q8XVW9xemLL7YV0I7y6RxOfb9oJ6em87dpwU0L0XAPsRWQAWbY%2bjN6CGew%3d%3d', 'https://jinshuju.net/f/aM6GUI', 'https://jinshuju.net/f/QU9mq1', 'https://jinshuju.net/f/RnrZwN', 'https://jinshuju.net/f/G7zcWi', 'https://jinshuju.net/f/TZE1NX', 'https://jinshuju.net/f/t7rPus', 'http://yongyushiyan.mikecrm.com/Jn6aZwM', 'http://yongyushiyan.mikecrm.com/I1zwobw', 'http://yongyushiyan.mikecrm.com/3Sa5QkT', 'http://yongyushiyan.mikecrm.com/WC5vJC1', 'http://yongyushiyan.mikecrm.com/LcdzUov', 'http://yongyushiyan.mikecrm.com/0F15NcX', 'http://yongyushiyan.mikecrm.com/0AeFGCX', 'http://yongyushiyan.mikecrm.com/ql3KsfK', 'http://yongyushiyan.mikecrm.com/SIyzPmT']
-SubmitMoney().startRequest('http://yongyushiyan.mikecrm.com/ql3KsfK 测试号 19999999999')
+# SubmitMoney().startRequest('http://yongyushiyan.mikecrm.com/ql3KsfK 测试号 19999999999')

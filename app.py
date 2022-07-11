@@ -6,7 +6,7 @@
 @Email: leo.r.huang@microcore.tech
 @Desc: 
 '''
-
+import threading
 from flask import Flask,render_template,request
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
@@ -43,25 +43,46 @@ def index():
             oneData = request.form.get('one')
             SubmitMoney().startRequest(oneData)
         elif form.twoSubmit.data:
-            print('点击了第二个按钮')
+            twoData = request.form.get('two')
+            SubmitMoney().startRequest(twoData)
         elif form.threeSubmit.data:
-            print('点击了第二个按钮')
+            threeData = request.form.get('three')
+            SubmitMoney().startRequest(threeData)
         elif form.fourSubmit.data:
-            print('点击了第二个按钮')
+            fourData = request.form.get('four')
+            SubmitMoney().startRequest(fourData)
         elif form.fiveSubmit.data:
-            print('点击了第二个按钮')
+            fiveData = request.form.get('five')
+            SubmitMoney().startRequest(fiveData)
         elif form.sixSubmit.data:
-            print('点击了第二个按钮')
+            sixData = request.form.get('six')
+            SubmitMoney().startRequest(sixData)
         elif form.sevenSubmit.data:
-            print('点击了第二个按钮')
+            sevenData = request.form.get('seven')
+            SubmitMoney().startRequest(sevenData)
         elif form.eightSubmit.data:
-            print('点击了第二个按钮')
+            eightData = request.form.get('eight')
+            SubmitMoney().startRequest(eightData)
         elif form.nineSubmit.data:
-            print('点击了第二个按钮')
+            nineData = request.form.get('nine')
+            SubmitMoney().startRequest(nineData)
         elif form.tenSubmit.data:
-            print('点击了第二个按钮')
+            tenData = request.form.get('ten')
+            SubmitMoney().startRequest(tenData)
         elif form.allSubmit.data:
-            print('点击了第二个按钮')
+            postItem = {
+                "one": request.form.get('one'),
+                "two": request.form.get('two'),
+                "three": request.form.get('three'),
+                "four": request.form.get('four'),
+                "five": request.form.get('five'),
+                "six": request.form.get('six'),
+                "seven": request.form.get('seven'),
+                "eight": request.form.get('eight'),
+                "nine": request.form.get('nine'),
+                "ten": request.form.get('ten'),
+            }
+            SubmitMoney(postItem.values())
 
     return render_template('index.html',form=form)
 
