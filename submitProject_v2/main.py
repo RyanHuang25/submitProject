@@ -11,7 +11,7 @@ import threading
 from flask import Flask,render_template,request
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
-from utils.submitSelenium import SubmitUser,SubmitUserMany
+from utils.submitSelenium import SubmitUser,SubmitUserMany,SubmitUserTime,SubmitUserClear
 
 app = Flask(__name__)
 app.secret_key = "shawroot"
@@ -49,6 +49,24 @@ def TwoIndexDealName(data_list):
             continue
         infoList.append(data)
     SubmitUserMany().startRequest(infoList)
+
+def ThreeIndexDealName(data_list):
+    infoList = []
+    for data in data_list:
+        data = data.replace('\r', '')
+        if data == "":
+            continue
+        infoList.append(data)
+    SubmitUserTime().startRequest(infoList)
+
+def FourIndexDealName(data_list):
+    infoList = []
+    for data in data_list:
+        data = data.replace('\r', '')
+        if data == "":
+            continue
+        infoList.append(data)
+    SubmitUserClear().startRequest(infoList)
 
 @app.route('/',methods=['GET','POST'])
 def index():
@@ -116,11 +134,21 @@ def twoIndex():
 
 @app.route('/three',methods=['GET','POST'])
 def threeIndex():
-    return render_template('three.html')
+    form = TwoForm()
+    if request.method == "POST":
+        if form.InputSubmit.data:
+            inputList = request.form.get('threeText').split('\n')
+            ThreeIndexDealName(inputList)
+    return render_template('three.html',form=form)
 
 @app.route('/four',methods=['GET','POST'])
 def fourIndex():
-    return render_template('four.html')
+    form = TwoForm()
+    if request.method == "POST":
+        if form.InputSubmit.data:
+            inputList = request.form.get('fourText').split('\n')
+            FourIndexDealName(inputList)
+    return render_template('four.html',form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)
