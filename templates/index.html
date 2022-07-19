@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title>功能一</title>
+        <link rel="stylesheet" href="static/css/index.css">
+    </head>
+    <body>
+        <table class="titleTable">
+            <tr>
+                <td>
+                    <a href="/">功能1</a>    
+                </td>
+                <td>
+                    <a href="/two">功能2</a>
+                </td>
+                <td>
+                    <a href="/three">功能3</a>
+                </td>
+                <td>
+                    <a href="/four">功能4</a>
+                </td>
+            </tr>
+        </table>
+        <h1>功能一</h1>
+        <p>提交格式：姓名 电话 url</p>
+        <form action="/" method='post'>
+            <table>
+                <tr>
+                    <td>
+                        <textarea name="one" id="one" cols="100" rows="5"></textarea>
+                        <div class="btn">
+                            {{ form.oneSubmit }}
+                        </div>
+                    </td>
+                    <td>
+                        <textarea name="two" id="two" cols="100" rows="5"></textarea>
+                        <div class="btn">
+                            {{ form.twoSubmit }}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea name="three" id="three" cols="100" rows="5"></textarea>
+                        <div class="btn">
+                            {{ form.threeSubmit }}
+                        </div>
+                    </td>
+                    <td>
+                        <textarea name="four" id="four" cols="100" rows="5"></textarea>
+                        <div class="btn">
+                            {{ form.fourSubmit }}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea name="five" id="five" cols="100" rows="5"></textarea>
+                        <div class="btn">
+                            {{ form.fiveSubmit }}
+                        </div>
+                    </td>
+                    <td>
+                        <textarea name="six" id="six" cols="100" rows="5"></textarea>
+                        <div class="btn">
+                            {{ form.sixSubmit }}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea name="seven" id="seven" cols="100" rows="5"></textarea>
+                        <div class="btn">
+                            {{ form.sevenSubmit }}
+                        </div>
+                    </td>
+                    <td>
+                        <textarea name="eight" id="eight" cols="100" rows="5"></textarea>
+                        <div class="btn">
+                            {{ form.eightSubmit }}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea name="nine" id="nine" cols="100" rows="5"></textarea>
+                        <div class="btn">
+                            {{ form.nineSubmit }}
+                        </div>
+                    </td>
+                    <td>
+                        <textarea name="ten" id="ten" cols="100" rows="5"></textarea>
+                        <div class="btn">
+                            {{ form.tenSubmit }}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div id="allBtn">
+                {{ form.allSubmit }}
+            </div>
+            
+        </form>
+        
+    </body>
+</html>
