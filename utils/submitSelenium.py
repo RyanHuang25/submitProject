@@ -34,6 +34,7 @@ class SubmitUser:
         :return:
         '''
         for data in data_list:
+            print(data)
             infoList = data.split(' ')
             userName = infoList[0]
             userPhone = infoList[1]
@@ -58,20 +59,23 @@ class SubmitUser:
         self.driver.find_element_by_id('regBtn').click()
 
     def jinshuju(self,userName,userPhone):
-        self.driver.find_element_by_xpath('//input[@name="field_3"] | //input[@name="field_1"]').send_keys(userName)
-        self.driver.find_element_by_xpath('//input[@name="field_4"] | //input[@name="field_2"]').send_keys(userPhone)
         try:
-            self.driver.find_elements_by_xpath("//div[@class='ant-form-item-control-input-content']/span/div/div")[-1].click()
+            self.driver.find_element_by_xpath('//input[@name="field_3"] | //input[@name="field_1"]').send_keys(userName)
+            self.driver.find_element_by_xpath('//input[@name="field_4"] | //input[@name="field_2"]').send_keys(userPhone)
+            try:
+                self.driver.find_elements_by_xpath("//div[@class='ant-form-item-control-input-content']/span/div/div")[-1].click()
+            except:
+                pass
+            self.driver.find_element_by_xpath('//div[@class="published-form__footer-buttons"]/button').click()
+            try:
+                # 判断网页是否提交成功
+                Wait(self.driver, 10).until(EC.presence_of_element_located((By.ID, "cashcow_root")))
+                print(f'{userName} ===>>> 提交成功了')
+            except:
+                self.driver.refresh()
+                self.jinshuju(userName, userPhone)
         except:
             pass
-        self.driver.find_element_by_xpath('//div[@class="published-form__footer-buttons"]/button').click()
-        try:
-            # 判断网页是否提交成功
-            Wait(self.driver, 10).until(EC.presence_of_element_located((By.ID, "cashcow_root")))
-            print(f'{userName} ===>>> 提交成功了')
-        except:
-            self.driver.refresh()
-            self.jinshuju(userName, userPhone)
 
     def maike(self,userName,userPhone,url):
         try:

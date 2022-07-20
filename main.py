@@ -39,6 +39,7 @@ def IndexDealOnlyName(data_list):
         if data == "":
             continue
         infoList.append(data)
+    print(infoList)
     SubmitUser().startRequest(infoList)
 
 def TwoIndexDealName(data_list):
